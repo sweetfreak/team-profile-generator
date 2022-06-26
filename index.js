@@ -4,14 +4,15 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const employees = [];
+const filePath =("./dist/index.html")
+
+const employees = module.exports = [];
 
 const generateTeamPage = require("./src/pagetemplate.js");
 
 
-//
-//const {writeFile} = require("./utils/generate-readme.js");
 
+//
 //this function executes when the program starts - node index.js
 const startTeamCreator = () => {
     console.log("Hello, Team Manager. Let's begin.");
@@ -24,7 +25,7 @@ const getManager = () => {
         {
             type: "input",
             name: "name",
-            message: "Enter your name for Manager entry.",
+            message: "Enter your name for the Manager position:",
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -37,7 +38,7 @@ const getManager = () => {
         {
             type: "input",
             name: "id",
-            message: "Enter your employee ID",
+            message: "Enter your employee ID:",
             validate: idInput => {
                 if (idInput) {
                     return true;
@@ -50,13 +51,13 @@ const getManager = () => {
         {
             type: "input",
             name: "email",
-            message: "Please enter your email address",
+            message: "Please enter your email address:",
             validate: emailInput => {
                 if (emailInput) {
                     return true;
                     //if time: add if statement for including @ symbol
                 } else {
-                    console.log("Please enter your email address");
+                    console.log("Please enter your email address.");
                     return false;
                 }
             }
@@ -64,7 +65,7 @@ const getManager = () => {
         {
             type: "input",
             name: "officeNumber",
-            message: "Please enter your office number.",
+            message: "Please enter your office number:",
             validate: officeInput => {
                 if (officeInput) {
                     return true;
@@ -90,7 +91,7 @@ const getEmployee = () => {
         {
     type: "confirm",
     name: "addEmployee",
-    message: "Type 'y' to add another employee",
+    message: "Type 'y' to add another employee:",
     default: false
     
     }])
@@ -101,13 +102,13 @@ const getEmployee = () => {
             {
                 type: "list",
                 name: "role",
-                message: "Select an employee role",
+                message: "Select an employee role:",
                 choices: ["Intern","Engineer"],
                 validate: typeInput => {
                     if (typeInput) {
                         return true;
                     } else {
-                        console.log("Please enter an employee type");
+                        console.log("Please choose an employee type.");
                         return false;
                     }
                 }
@@ -115,7 +116,7 @@ const getEmployee = () => {
             {
                 type: "input",
                 name: "name",
-                message: "Enter the employee's name",
+                message: "Enter the employee's name:",
                 validate: nameInput => {
                     if (nameInput) {
                         return true;
@@ -128,7 +129,7 @@ const getEmployee = () => {
             {
                 type: "input",
                 name: "id",
-                message: "Enter their employee ID",
+                message: "Enter their employee ID:",
                 validate: idInput => {
                     if (idInput) {
                         return true;
@@ -141,13 +142,13 @@ const getEmployee = () => {
             {
                 type: "input",
                 name: "email",
-                message: "Please enter the employee's email address",
+                message: "Please enter the employee's email address:",
                 validate: emailInput => {
                     if (emailInput) {
                         return true;
                         //if time: add if statement for including @ symbol
                     } else {
-                        console.log("Please enter your email address");
+                        console.log("Enter the employee's email address.");
                         return false;
                     }
                 }
@@ -155,12 +156,12 @@ const getEmployee = () => {
             {
                 type: "input",
                 name: "github",
-                message: "Please enter the engineer's Github username.",
+                message: "Please enter the engineer's Github username:",
                 validate: githubInput => {
                     if (githubInput) {
                         return true;
                     } else {
-                        console.log("Enter the Engineer's Github username.");
+                        console.log("Enter the engineer's Github username.");
                         return false;
                     }
                 },
@@ -171,7 +172,7 @@ const getEmployee = () => {
             {
                 type: "input",
                 name: "school",
-                message: "Please enter the intern's school.",
+                message: "Please enter the intern's school:",
                 validate: githubInput => {
                     if (githubInput) {
                         return true;
@@ -198,21 +199,22 @@ const getEmployee = () => {
         });   
     } else {
         console.log("Generating team page with following employees:");
-        console.info(employees);
-        return employees;
-        // generateTeamPage(JSON.stringify(employees))
-        //     .then(teamPageHTML => {
-        //          writeFile(teamPageHTML);
-        //          console.log("All Done! Your Team Page has been generated.")
-        //     });
+        console.info(employees); 
+        writeFile(employees)
+        //return employees;
     }
+    
 
-    }
-)};
+    })
+    //.then(writeFile(employees));
+};
+
+
+
 
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
-      fs.writeFile('./dist/index.html', fileContent, err => {
+      fs.writeFile('./dist/index.html', generateTeamPage(fileContent), err => {
         //if there's an error, reject the Promise and send the error to the Promise's ".catch()" method
         if (err) {
           reject(err);
@@ -233,12 +235,15 @@ const writeFile = fileContent => {
 
 
 
-     startTeamCreator();
+     startTeamCreator()
+     
+
+
     //     .then(getManager)
     //     .then(getEmployee);
     // .then(employeeData => {
     //     return generateTeamPage(employeeData)
     // })
-    // .then(teamPageHTML => {
-    //     writeFile(teamPageHTML);
-    // });
+    
+   
+    module.exports = employees;
