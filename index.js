@@ -19,7 +19,7 @@ const startTeamCreator = () => {
     getManager();
 }
 
-
+//asks manager questions
 const getManager = () => {
      inquirer.prompt([
         {
@@ -84,7 +84,7 @@ const getManager = () => {
         
     });
 };
-
+//adds employees
 const getEmployee = () => {
 
     inquirer.prompt([
@@ -201,19 +201,18 @@ const getEmployee = () => {
         console.log("Generating team page with following employees:");
         console.info(employees); 
         writeFile(employees)
-        //return employees;
     }
     
 
     })
-    //.then(writeFile(employees));
 };
 
 
 
-
+//writes content to file.
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
+        //please note, there MUST be an index.html file already included
       fs.writeFile('./dist/index.html', generateTeamPage(fileContent), err => {
         //if there's an error, reject the Promise and send the error to the Promise's ".catch()" method
         if (err) {
@@ -237,13 +236,5 @@ const writeFile = fileContent => {
 
      startTeamCreator()
      
-
-
-    //     .then(getManager)
-    //     .then(getEmployee);
-    // .then(employeeData => {
-    //     return generateTeamPage(employeeData)
-    // })
-    
    
     module.exports = employees;

@@ -5,7 +5,7 @@ const specificRoleQuestion = (person) => {
         if (person.getRole() === 'Manager') {
             specificRole = `Office Number: ${person.officeNumber}`
         } else if (person.getRole() === 'Engineer') {
-            specificRole = `Github: <a href = "https://github.com/${person.github}" target="_blank" rel="noopener noreferrer"> ${person.github}`
+            specificRole = `Github: <a href = "https://github.com/${person.github}" target="_blank" rel="noopener noreferrer"> ${person.github} </a>`
         } else {
             specificRole = `School: ${person.school}`
         }
@@ -34,18 +34,6 @@ const generateEmployees = (employeeArr) => {
     }
     return pageHTML;
 
-
-
-
-
-    //     return`
-
-    //     ${person.getRole()}
-    //     Name: ${person.getName()}
-    //     ${specificRole}
-
-    //     `
-    // })
 }
 
 
